@@ -1,43 +1,23 @@
-# LIGHTNESS — Railway Setup
+# LIGHTNESS OP Security Edition
 
-## 1. Upload to GitHub
-Upload all files from this folder to a new GitHub repository.
+Railway-ready Discord bot.
 
-## 2. Create Railway service
-Create a new Railway project and deploy the GitHub repository.
+## Setup
+- Upload these files to GitHub.
+- Railway → Variables → `DISCORD_TOKEN`.
+- Do NOT put the real token in GitHub.
+- Owner ID: `1433457392917676138`
+- Guild ID: `1544039840767803412`
 
-## 3. Add variable
-Railway → Service → Variables:
+## Security
+Includes a permission-gated security layer with:
+- Anti-nuke monitoring for repeated channel/role create/delete actions
+- Emergency `/lockdown` and `/unlockdown`
+- `/security_setup` status
+- Owner whitelist
+- Defensive timeout/kick response when thresholds are crossed
 
-DISCORD_TOKEN = YOUR_DISCORD_BOT_TOKEN
+Important: no Discord bot can guarantee that nobody can ever bypass security. Give LIGHTNESS the minimum required permissions, keep its role above roles it must manage, protect the owner account, and enable Discord's native security features/2FA where appropriate.
 
-Do NOT put the token inside GitHub.
-
-## 4. Start command
-Railway can use the included Procfile. If needed, set:
-python bot.py
-
-## 5. Discord bot permissions
-Invite the bot to your server with the permissions required by the moderation commands:
-View Channels, Send Messages, Embed Links, Read Message History, Manage Messages, Moderate Members, Kick Members, Ban Members, Manage Channels.
-
-Use the minimum permissions you actually need.
-
-## 6. Owner access
-Owner ID is hard-coded as:
-1433457392917676138
-
-Guild ID:
-1544039840767803412
-
-## Permission commands
-/add user command: give one command
-/add user all: give all normal commands
-/remove user command: remove one command
-/remove user all: remove all commands
-/list: list permitted users
-/check user: show a user's permissions
-
-Only the owner ID can use these four permission-management commands.
-
-The bot stores permissions in permissions.json. For a production setup, commit/persist this file or use Railway's persistent volume if you want permissions to survive redeploys. Keep the bot token private.
+## Emoji system
+Your supplied emoji IDs are centralized in `bot.py` and resolved by ID, so message code does not need emoji tags repeated everywhere.
